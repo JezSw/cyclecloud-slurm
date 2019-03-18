@@ -332,3 +332,7 @@ ASALocalRun/
 
 # rpmbuild output
 *.rpm
+
+# blobs files
+blobs/*
+!blobs/singularity.conf

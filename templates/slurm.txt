@@ -3,7 +3,7 @@
 ## Cluster Configuration File ##
 ################################
 
-[cluster Slurm]
+[cluster SP3cluster]
 FormLayout = selectionpanel
 Category = Schedulers
 
@@ -20,7 +20,7 @@ Autoscale = $Autoscale
         [[[configuration]]]
         slurm.version = $configuration_slurm_version
 
-        [[[cluster-init cyclecloud/slurm:default:1.0.2]]]
+        [[[cluster-init SP3cluster:default:1.0.3]]]
         Optional = true
 
     [[node master]]
@@ -30,7 +30,7 @@ Autoscale = $Autoscale
     
         [[[configuration]]]
 
-        [[[cluster-init cyclecloud/slurm:master:1.0.2]]]
+        [[[cluster-init SP3cluster:master:1.0.3]]]
 
         [[[network-interface eth0]]]
         AssociatePublicIpAddress = $UsePublicNetwork
@@ -50,7 +50,7 @@ Autoscale = $Autoscale
 
         [[[configuration]]]
 
-        [[[cluster-init cyclecloud/slurm:execute:1.0.2]]]
+        [[[cluster-init SP3cluster:execute:1.0.3]]]
 
         [[[network-interface eth0]]]
         AssociatePublicIpAddress = $ExecuteNodesPublic
@@ -156,18 +156,18 @@ defaultvalue = 17.11.12-1
         Label = Base OS
         ParameterType = Cloud.Image
         Config.OS = linux
-        DefaultValue = cycle.image.centos7
+        DefaultValue = cycle.image.ubuntu16
         Config.Filter := Package in {"cycle.image.centos7", "cycle.image.ubuntu16", "cycle.image.ubuntu18"}
 
         [[[parameter MasterClusterInitSpecs]]]
         Label = Master Cluster-Init
-        DefaultValue = =undefined
+        DefaultValue = SP3cluster:default:1.0.3
         Description = Cluster init specs to apply to the master node
         ParameterType = Cloud.ClusterInitSpecs
     
         [[[parameter ExecuteClusterInitSpecs]]]
         Label = Execute Cluster-Init
-        DefaultValue = =undefined
+        DefaultValue = SP3cluster:default:1.0.3
         Description = Cluster init specs to apply to execute nodes
         ParameterType = Cloud.ClusterInitSpecs
 	
