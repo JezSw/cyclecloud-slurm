@@ -39,6 +39,23 @@ Autoscale = $Autoscale
         PrivatePort = 8652
         PublicPort = 8652
 
+# Add 2 premium disks in a RAID 0 configuration to the NFS export
+[[[volume nfs-1]]]
+Size = 512
+SSD = False
+Mount = nfs
+Persistent = true
+
+[[[volume nfs-2]]]
+Size = 512
+SSD = False
+Mount = nfs
+Persistent = true
+
+[[[configuration cyclecloud.mounts.nfs]]]
+mountpoint = /mnt/exports
+fs_type = ext4
+raid_level = 0
 
     [[nodearray execute]]
     MachineType = $ExecuteMachineType
