@@ -45,7 +45,7 @@ end
 bash 'Add nodes to slurm config' do
   code <<-EOH
     iplist=$(grep ip- /etc/hosts | awk '{print $2}' | cut -d'.' -f1 | paste -sd "," -)
-    echo "\nNodename=${iplist} State=FUTURE" >> /sched/slurm.conf
+    echo "\nNodename=${iplist} State=FUTURE Procs=2" >> /sched/slurm.conf
     touch /etc/slurm.installed
     EOH
   not_if { ::File.exist?('/etc/slurm.installed') }
